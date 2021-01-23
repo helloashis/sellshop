@@ -14,5 +14,20 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('public.layout');
 });
+
+
+//Route::prefix('admin')->group(base_path('routes/admin.php'));
+
+Route::prefix('users')->group(base_path('routes/user.php'));
+
+
+Auth::routes();
+
+Route::get('/admin/home', 'HomeController@index')->name('home');
+
+Route::post('/add-category', 'CategoryController@create');
+
+Route::get('/{anypath}', 'HomeController@index')->where('path', '.*');
+
